@@ -2,7 +2,7 @@
 
 namespace ABAC\Entities\Operators;
 
-class Equals extends Operator {
+class NotEquals extends Operator {
     
     public function execute($leftValue, $rightValue)
     {

@@ -2,6 +2,11 @@
 
 namespace ABAC\Services;
 
+use InvalidArgumentException;
+use ABAC\Entities\User;
+use ABAC\Entities\Environment;
+
+
 class Request {
     
     protected $action;
@@ -12,7 +17,8 @@ class Request {
     
     protected $environment;
     
-    public function _construct($action, $resource, User $user, Environment $env)
+    
+    public function __construct($action, $resource, User $user, Environment $env)
     {
         $this->action = $action;
         $this->resource = $ressource;
@@ -20,8 +26,18 @@ class Request {
         $this->environment = $env;
     }
     
+    
     public function getValue($dotNotation)
     {
-        // TODO: Parse dot notation to find requested values
+        return array_reduce(explode(".", $dotNotation), function($carry, $item){
+            
+            // Check property is set
+            if(property_exists($carry, $item)){
+                return $carry->{$item};
+            }
+            
+            throw new InvalidArgumentException("Property '$item' does not exist!");
+            
+        }, $this);
     }
 }

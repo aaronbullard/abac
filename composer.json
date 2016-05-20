@@ -1,0 +1,23 @@
+{
+    "name": "aaronbullard/abac",
+    "description": "ABAC Demo",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aaron Bullard",
+            "email": "jabullard@aol.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "phpunit/phpunit": "^4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "ABAC\\": "src"
+        },
+        "classmap": [
+            "tests"    
+        ]
+    }
+}
