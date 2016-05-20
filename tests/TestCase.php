@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function dd($value){
     print_r($value);
@@ -6,4 +6,11 @@ function dd($value){
     exit;
 }
 
-class TestCase extends PHPUnit_Framework_TestCase {}
+class TestCase extends PHPUnit_Framework_TestCase {
+    
+    public function tearDown()
+    {
+        Mockery::close();
+        parent::tearDown();
+    }
+}

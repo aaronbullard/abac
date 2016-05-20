@@ -2,6 +2,8 @@
 
 namespace ABAC\Entities;
 
+use ABAC\Services\Request;
+
 class Rule implements \ABAC\Contracts\Validatable {
     
     

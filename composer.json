@@ -19,5 +19,8 @@
         "classmap": [
             "tests"    
         ]
+    },
+    "require-dev": {
+        "mockery/mockery": "^0.9.4"
     }
 }

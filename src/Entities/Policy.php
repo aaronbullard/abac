@@ -2,12 +2,13 @@
 
 namespace ABAC\Entities;
 
+use InvalidArgumentException;
 use ABAC\Services\Request;
 
 class Policy implements \ABAC\Contracts\Validatable {
     
-    const ACCEPT = 'ACCEPT';
-    const DENY = 'DENY';
+    const ACCEPT    = 'ACCEPT';
+    const DENY      = 'DENY';
     
     protected $responseType;
     
@@ -20,6 +21,10 @@ class Policy implements \ABAC\Contracts\Validatable {
     
     public function __construct($responseType, $name, $description, array $rules)
     {
+        if( ! in_array($responseType, [static::ACCEPT, static::DENY]) ){
+            throw new InvalidArgumentException("Response type must be 'ACCEPT' or 'DENY.");
+        }
+        
         $this->responseType = $responseType;
         $this->name = $name;
         $this->description = $description;

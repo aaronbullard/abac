@@ -3,6 +3,7 @@
 namespace ABAC\Entities;
 
 use ABAC\Services\Request;
+use ABAC\Entities\Operators\Operator;
 
 class Condition implements \ABAC\Contracts\Validatable {
     
@@ -12,17 +13,17 @@ class Condition implements \ABAC\Contracts\Validatable {
     
     protected $right;
     
-    public function __construct(Operator $operator, $left, $right)
+    public function __construct($left, Operator $operator, $right)
     {
+        $this->left     = $left;
         $this->operator = $operator;
-        $this->left = $left;
-        $this->right = $right;
+        $this->right    = $right;
     }
     
     public function validate(Request $request)
     {
-        $leftValue = $request->getValue($this->left);
-        $rightValue = $request->getValue($this->right);
+        $leftValue  = $request->getValue($this->left);
+        $rightValue = $this->right;
         
         return $this->operator->execute($leftValue, $rightValue);
     }
