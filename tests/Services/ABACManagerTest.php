@@ -6,6 +6,7 @@ use Mockery;
 use ABAC\Entities\Policy;
 use ABAC\Entities\User;
 use ABAC\Entities\Environment;
+use InvalidArgumentException;
 
 class ABACManagerTest extends \TestCase {
     
@@ -45,6 +46,19 @@ class ABACManagerTest extends \TestCase {
     }
     
     
+    public function test_it_fail_with_no_ACCEPT_policy()
+    {
+        $policies = [];
+        $policies[] = $this->createPolicy($this->request, Policy::ACCEPT, FALSE);
+        $policies[] = $this->createPolicy($this->request, Policy::ACCEPT, FALSE);
+        $policies[] = $this->createPolicy($this->request, Policy::ACCEPT, FALSE);
+        
+        $abac = ABACManager::create($policies);
+        
+        $this->assertFalse( $abac->validate( $this->request ) );
+    }
+    
+    
     public function test_it_fails_with_one_DENY_policy()
     {
         $policies = [];
@@ -70,5 +84,16 @@ class ABACManagerTest extends \TestCase {
         $abac = ABACManager::create($policies);
         
         $this->assertTrue( $abac->validate( $this->request ) );
+    }
+    
+    
+    public function test_exception_for_invalid_response_type()
+    {
+        $policies = [];
+        $policies[] = $this->createPolicy($this->request, "NO_SUCH_TYPE", TRUE);
+        
+        
+        $this->setExpectedException(InvalidArgumentException::class);
+        $abac = ABACManager::create($policies);
     }
 }

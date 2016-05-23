@@ -4,17 +4,16 @@ namespace ABAC\Entities;
 
 use InvalidArgumentException;
 use ABAC\Services\Request;
+use ABAC\Traits\DescriptionTrait;
 
 class Policy implements \ABAC\Contracts\Validatable {
+    
+    use DescriptionTrait;
     
     const ACCEPT    = 'ACCEPT';
     const DENY      = 'DENY';
     
     protected $responseType;
-    
-    protected $name;
-    
-    protected $description;
     
     protected $rules;
     
@@ -44,18 +43,6 @@ class Policy implements \ABAC\Contracts\Validatable {
     public function getResponseType()
     {
         return $this->responseType;
-    }
-    
-    
-    public function getName()
-    {
-        return $this->name;
-    }
-    
-    
-    public function getDescription()
-    {
-        return $this->description;
     }
     
     

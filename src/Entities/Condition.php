@@ -23,7 +23,7 @@ class Condition implements \ABAC\Contracts\Validatable {
     public function validate(Request $request)
     {
         $leftValue  = $request->getValue($this->left);
-        $rightValue = $this->right;
+        $rightValue = $request->getValue($this->right);
         
         return $this->operator->execute($leftValue, $rightValue);
     }

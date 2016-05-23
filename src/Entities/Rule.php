@@ -3,14 +3,12 @@
 namespace ABAC\Entities;
 
 use ABAC\Services\Request;
+use ABAC\Traits\DescriptionTrait;
 
 class Rule implements \ABAC\Contracts\Validatable {
     
-    
-    protected $name;
-    
-    protected $description;
-    
+    use DescriptionTrait;
+
     protected $conditions;
     
     protected $isORRule;
@@ -23,18 +21,7 @@ class Rule implements \ABAC\Contracts\Validatable {
         $this->isORRule = $isORRule;
     }
     
-    public function getName()
-    {
-        return $this->name;
-    }
-    
-    
-    public function getDescription()
-    {
-        return $this->description;
-    }
-    
-    
+
     public function validate(Request $request)
     {
         return $this->isORRule ? $this->validateAsOR($request) : $this->validateAsAND($request);

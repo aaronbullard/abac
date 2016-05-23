@@ -2,11 +2,12 @@
 
 namespace ABAC\Entities;
 
+use Mockery;
 use ABAC\Services\Request;
 use ABAC\Entities\Operators\Equals;
 use ABAC\Entities\Operators\NotEquals;
+use InvalidArgumentException;
 
-use Mockery;
 
 class PolicyTest extends \TestCase {
     
@@ -27,6 +28,24 @@ class PolicyTest extends \TestCase {
         $mock = Mockery::mock(Rule::class);
         $mock->shouldReceive( 'validate' )->with($request)->andReturn($bool);
         return $mock;
+    }
+    
+    
+    public function test_setting_and_getting()
+    {
+        $policy = Policy::create(Policy::ACCEPT, 'Aaron\'s Only', "Only accept Aaron.", []);
+        
+        $this->assertEquals(Policy::ACCEPT, $policy->getResponseType());
+        $this->assertEquals("Aaron's Only", $policy->getName());
+        $this->assertEquals("Only accept Aaron.", $policy->getDescription());
+    }
+    
+    
+    public function test_exception_on_wrong_response_type()
+    {
+        $this->setExpectedException(InvalidArgumentException::class);
+        
+        $policy = Policy::create("NO_SUCH_TYPE", 'Aaron\'s Only', "Only accept Aaron.", []);
     }
     
     

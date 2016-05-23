@@ -14,7 +14,7 @@ class RequestTest extends \TestCase {
         parent::setUp();
     }
     
-    public function test_it_get_value()
+    public function test_it_gets_a_dynamic_value()
     {
         $user = new User;
         $user->name = 'Aaron';
@@ -22,6 +22,16 @@ class RequestTest extends \TestCase {
         $request = new Request('GET', 'programs', $user, new Environment);
        
         $this->assertEquals($user->name, $request->getValue('$.user.name'));
+    }
+    
+    public function test_it_gets_a_static_value()
+    {
+        $user = new User;
+        $user->name = 'Aaron';
+        
+        $request = new Request('GET', 'programs', $user, new Environment);
+       
+        $this->assertEquals("Aaron", $request->getValue('Aaron'));
     }
     
     public function test_it_throws_an_invalidargumentexception()
