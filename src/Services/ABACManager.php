@@ -12,7 +12,7 @@ class ABACManager implements \ABAC\Contracts\Validatable {
     protected $denyPolicies = [];
     
     
-    private function __construct(array $policies)
+    protected function __construct(array $policies)
     {
         $this->acceptPolicies = static::filterPoliciesByResponseType($policies, Policy::ACCEPT);
    
@@ -52,7 +52,7 @@ class ABACManager implements \ABAC\Contracts\Validatable {
     }
     
     
-    public function doesADenyPolicyPreventAccess(Request $request)
+    protected function doesADenyPolicyPreventAccess(Request $request)
     {
         foreach($this->denyPolicies as $policy)
         {
@@ -65,7 +65,7 @@ class ABACManager implements \ABAC\Contracts\Validatable {
     }
    
     
-    public function doesOneAcceptPolicyGiveAccess(Request $request)
+    protected function doesOneAcceptPolicyGiveAccess(Request $request)
     {
         foreach($this->acceptPolicies as $policy)
         {

@@ -2,7 +2,7 @@
 
 namespace ABAC\Entities\Operators;
 
-class LessThanOrEqualToTest extends OperatorTest{
+class LessThanInclusiveTest extends OperatorTest{
 
     public function test_true()
     {

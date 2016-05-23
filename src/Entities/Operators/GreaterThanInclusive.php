@@ -2,7 +2,7 @@
 
 namespace ABAC\Entities\Operators;
 
-class GreaterThanOrEqualTo extends Operator {
+class GreaterThanInclusive extends Operator {
     
     public function execute($leftValue, $rightValue)
     {

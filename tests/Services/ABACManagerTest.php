@@ -59,6 +59,16 @@ class ABACManagerTest extends \TestCase {
     }
     
     
+    public function test_it_fails_with_no_policy()
+    {
+        $policies = [];
+        
+        $abac = ABACManager::create($policies);
+        
+        $this->assertFalse( $abac->validate( $this->request ) );
+    }
+    
+    
     public function test_it_fails_with_one_DENY_policy()
     {
         $policies = [];

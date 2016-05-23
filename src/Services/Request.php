@@ -31,24 +31,21 @@ class Request {
     {
         $params = explode(".", $value);
         
-        // is value NOT a dot notation starting with $.
+        // is value a dot notation starting with $.
         if( $params[0] === "$" ){
-            array_shift($params);  
-        }
-        else{
-            return $params[0];
-        }
-        
-        
-        return array_reduce($params, function($carry, $item){
             
-            // Check property is set
-            if(property_exists($carry, $item)){
+            array_shift($params);
+            
+            return array_reduce($params, function($carry, $item){
+                // Check property not is set
+                if(! property_exists($carry, $item)){
+                    throw new InvalidArgumentException("Property '$item' does not exist!");
+                }
+                
                 return $carry->{$item};
-            }
-            
-            throw new InvalidArgumentException("Property '$item' does not exist!");
-            
-        }, $this);
+            }, $this);
+        }
+        
+        return $params[0];
     }
 }
