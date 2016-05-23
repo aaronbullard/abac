@@ -3,25 +3,26 @@
 namespace ABAC\Services;
 
 use InvalidArgumentException;
+use ABAC\Entities\Policy;
 
 class ABACManager implements \ABAC\Contracts\Validatable {
     
     
-    protected $acceptPolicies;
+    protected $acceptPolicies = [];
     
-    protected $denyPolicies;
+    protected $denyPolicies = [];
     
     
     private function __construct(array $policies)
     {
         foreach($policies as $policy)
         {
-            if($policy->getReponseType() === Policy::ACCEPT){
+            if($policy->getResponseType() === Policy::ACCEPT){
                 $this->acceptPolicies[] = $policy;
                 continue;
             }
             
-            if($policy->getReponseType() === Policy::DENY){
+            if($policy->getResponseType() === Policy::DENY){
                 $this->denyPolicies[] = $policy;
                 continue;
             }

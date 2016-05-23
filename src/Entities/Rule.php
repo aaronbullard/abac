@@ -34,6 +34,7 @@ class Rule implements \ABAC\Contracts\Validatable {
     
     public function validate(Request $request)
     {
+        // If one condition doesn't pass, return FALSE
         foreach($this->conditions as $rule){
             if( ! $rule->validate($request)){
                 return FALSE;

@@ -21,7 +21,7 @@ class RequestTest extends \TestCase {
         
         $request = new Request('GET', 'programs', $user, new Environment);
        
-        $this->assertEquals($user->name, $request->getValue('user.name'));
+        $this->assertEquals($user->name, $request->getValue('$.user.name'));
     }
     
     public function test_it_throws_an_invalidargumentexception()
@@ -33,6 +33,6 @@ class RequestTest extends \TestCase {
        
         $this->setExpectedException(InvalidArgumentException::class, "Property 'age' does not exist!");
        
-        $request->getValue('user.age');
+        $request->getValue('$.user.age');
     }
 }

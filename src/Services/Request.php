@@ -27,9 +27,20 @@ class Request {
     }
     
     
-    public function getValue($dotNotation)
+    public function getValue($value)
     {
-        return array_reduce(explode(".", $dotNotation), function($carry, $item){
+        $params = explode(".", $value);
+        
+        // is value NOT a dot notation starting with $.
+        if( $params[0] === "$" ){
+            array_shift($params);  
+        }
+        else{
+            return $params[0];
+        }
+        
+        
+        return array_reduce($params, function($carry, $item){
             
             // Check property is set
             if(property_exists($carry, $item)){

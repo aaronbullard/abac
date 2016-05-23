@@ -12,6 +12,9 @@
     "require": {
         "phpunit/phpunit": "^4.8"
     },
+    "require-dev": {
+        "mockery/mockery": "^0.9.4"
+    },
     "autoload": {
         "psr-4": {
             "ABAC\\": "src"
@@ -20,7 +23,7 @@
             "tests"    
         ]
     },
-    "require-dev": {
-        "mockery/mockery": "^0.9.4"
+    "scripts": {
+        "test": "vendor/bin/phpunit --colors=always --coverage-text=./test-coverage.txt"
     }
 }

@@ -24,8 +24,8 @@ class RuleTest extends \TestCase {
     {
         $conditions = [];
         
-        $conditions[] = new Condition("user.name", new Equals, "Aaron");
-        $conditions[] = new Condition("user.gender", new Equals, "Male");
+        $conditions[] = new Condition("$.user.name", new Equals, "Aaron");
+        $conditions[] = new Condition("$.user.gender", new Equals, "Male");
         
         $rule = new Rule("Aaron's Rule", "Is an Aaron", $conditions);
         
@@ -37,8 +37,8 @@ class RuleTest extends \TestCase {
     {
         $conditions = [];
         
-        $conditions[] = new Condition("user.name", new Equals, "Bob");
-        $conditions[] = new Condition("user.gender", new Equals, "Male");
+        $conditions[] = new Condition("$.user.name", new Equals, "Bob");
+        $conditions[] = new Condition("$.user.gender", new Equals, "Male");
         
         $rule = new Rule("Bob's Rule", "Is an Bob", $conditions);
         
