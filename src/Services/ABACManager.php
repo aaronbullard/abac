@@ -7,7 +7,6 @@ use ABAC\Entities\Policy;
 
 class ABACManager implements \ABAC\Contracts\Validatable {
     
-    
     protected $acceptPolicies = [];
     
     protected $denyPolicies = [];
@@ -15,20 +14,23 @@ class ABACManager implements \ABAC\Contracts\Validatable {
     
     private function __construct(array $policies)
     {
-        foreach($policies as $policy)
-        {
-            if($policy->getResponseType() === Policy::ACCEPT){
-                $this->acceptPolicies[] = $policy;
-                continue;
-            }
-            
-            if($policy->getResponseType() === Policy::DENY){
-                $this->denyPolicies[] = $policy;
-                continue;
-            }
-            
+        $this->acceptPolicies = static::filterPoliciesByResponseType($policies, Policy::ACCEPT);
+   
+        $this->denyPolicies = static::filterPoliciesByResponseType($policies, Policy::DENY);
+        
+        $count = count($this->acceptPolicies) + count($this->denyPolicies);
+        
+        if(count($policies) > $count){
             throw new InvalidArgumentException("Policy response type is not recognized!");
         }
+    }
+    
+    
+    protected static function filterPoliciesByResponseType(array $policies, $responseType)
+    {
+        return array_filter($policies, function($policy) use ($responseType) {
+            return $policy->getResponseType() === $responseType;
+        });
     }
     
     

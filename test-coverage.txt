@@ -1,0 +1,38 @@
+
+
+Code Coverage Report:     
+  2016-05-23 18:27:20     
+                          
+ Summary:                 
+  Classes: 100.00% (17/17)
+  Methods: 100.00% (29/29)
+  Lines:   100.00% (87/87)
+
+\ABAC\Entities::Condition
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  7/  7)
+\ABAC\Entities::Policy
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 14/ 14)
+\ABAC\Entities::Rule
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 16/ 16)
+\ABAC\Entities\Operators::Between
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  3/  3)
+\ABAC\Entities\Operators::BetweenInclusive
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  3/  3)
+\ABAC\Entities\Operators::Equals
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\ABAC\Entities\Operators::GreaterThan
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\ABAC\Entities\Operators::GreaterThanOrEqualTo
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\ABAC\Entities\Operators::LessThan
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\ABAC\Entities\Operators::LessThanOrEqualTo
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\ABAC\Entities\Operators::NotEquals
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\ABAC\Services::ABACManager
+  Methods: 100.00% ( 6/ 6)   Lines: 100.00% ( 22/ 22)
+\ABAC\Services::Request
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 14/ 14)
+\ABAC\Traits::DescriptionTrait
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  2/  2)

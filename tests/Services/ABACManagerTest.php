@@ -92,7 +92,6 @@ class ABACManagerTest extends \TestCase {
         $policies = [];
         $policies[] = $this->createPolicy($this->request, "NO_SUCH_TYPE", TRUE);
         
-        
         $this->setExpectedException(InvalidArgumentException::class);
         $abac = ABACManager::create($policies);
     }
