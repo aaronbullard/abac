@@ -45,5 +45,18 @@ class RuleTest extends \TestCase {
         $this->assertFalse( $rule->validate($this->request) );
     }
     
+    
+    public function test_it_passes_as_OR_conditions()
+    {
+        $conditions = [];
+        
+        $conditions[] = new Condition("$.user.name", new Equals, "Bob");
+        $conditions[] = new Condition("$.user.gender", new Equals, "Male");
+        
+        $rule = new Rule("Bob's Rule", "Is a Bob", $conditions, TRUE);
+        
+        $this->assertTrue( $rule->validate($this->request) );
+    }
+    
 
 }
