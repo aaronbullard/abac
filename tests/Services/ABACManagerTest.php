@@ -46,7 +46,7 @@ class ABACManagerTest extends \TestCase {
     }
     
     
-    public function test_it_fail_with_no_ACCEPT_policy()
+    public function test_it_fails_with_no_ACCEPT_policy()
     {
         $policies = [];
         $policies[] = $this->createPolicy($this->request, Policy::ACCEPT, FALSE);

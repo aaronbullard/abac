@@ -3,36 +3,30 @@
 namespace ABAC\Services;
 
 use InvalidArgumentException;
+use Illuminate\Support\Collection;
 use ABAC\Entities\Policy;
 
 class ABACManager implements \ABAC\Contracts\Validatable {
     
-    protected $acceptPolicies = [];
-    
-    protected $denyPolicies = [];
-    
-    
+    protected $policies;
+
     protected function __construct(array $policies)
     {
-        $this->acceptPolicies = static::filterPoliciesByResponseType($policies, Policy::ACCEPT);
-   
-        $this->denyPolicies = static::filterPoliciesByResponseType($policies, Policy::DENY);
+        Collection::macro('filterResponseType', function($responseType){
+            return collect($this->items)->filter(function($policy) use ($responseType){
+                return $policy->getResponseType() === $responseType;
+            });
+        });
         
-        $count = count($this->acceptPolicies) + count($this->denyPolicies);
+        $this->policies = collect($policies);
         
-        if(count($policies) > $count){
-            throw new InvalidArgumentException("Policy response type is not recognized!");
-        }
-    }
-    
-    
-    protected static function filterPoliciesByResponseType(array $policies, $responseType)
-    {
-        return array_filter($policies, function($policy) use ($responseType) {
-            return $policy->getResponseType() === $responseType;
+        $this->policies->each(function($policy){
+            if(! in_array($policy->getResponseType(), [Policy::ACCEPT, Policy::DENY])){
+                throw new InvalidArgumentException("Policy response type is not recognized!");
+            }
         });
     }
-    
+
     
     public static function create(array $policies)
     {
@@ -54,26 +48,20 @@ class ABACManager implements \ABAC\Contracts\Validatable {
     
     protected function doesADenyPolicyPreventAccess(Request $request)
     {
-        foreach($this->denyPolicies as $policy)
-        {
-            if($policy->validate($request)){
-                return TRUE;
-            }
-        }
-        
-        return FALSE;
+        return $this->policies
+            ->filterResponseType(Policy::DENY)
+            ->reduce(function($carry, $policy) use ($request){
+                return $carry ? $carry :  $policy->validate($request);
+            }, FALSE);
     }
    
     
     protected function doesOneAcceptPolicyGiveAccess(Request $request)
     {
-        foreach($this->acceptPolicies as $policy)
-        {
-            if($policy->validate($request)){
-                return TRUE;
-            }
-        }
-        
-        return FALSE;
+        return $this->policies
+            ->filterResponseType(Policy::ACCEPT)
+            ->reduce(function($carry, $policy) use ($request){
+                return $carry ? $carry :  $policy->validate($request);
+            }, FALSE);
     }
 }

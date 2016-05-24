@@ -10,7 +10,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^4.8",
+        "illuminate/support": "^5.2"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4"

@@ -27,7 +27,7 @@ class Policy implements \ABAC\Contracts\Validatable {
         $this->responseType = $responseType;
         $this->name = $name;
         $this->description = $description;
-        $this->rules = $rules;
+        $this->rules = collect($rules);
     }
     
     
@@ -48,12 +48,8 @@ class Policy implements \ABAC\Contracts\Validatable {
     
     public function validate(Request $request)
     {
-        foreach($this->rules as $rule){
-            if( ! $rule->validate($request)){
-                return FALSE;
-            }
-        }
-        
-        return TRUE;
+        return ! $this->rules->reject(function($rule) use ($request){
+            return $rule->validate($request);
+        })->count();
     }
 }
