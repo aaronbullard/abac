@@ -1,30 +1,42 @@
+# ABAC
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+Attribute Based Access Control
 
+Back end development for Fed API
 
-Hi there! Welcome to Cloud9 IDE!
+Key Links     | URLs
+------------- | -------------
+Swagger Docs (json) | [http://localhost:3000/docs](http://localhost:3000/docs)
+Schemas      | [http://localhost:3000/schemas](http://localhost:3000/schemas)
 
-To get you started, we have created a small hello world application.
+## Getting started
 
-1) Open the hello-world.php file
+Clone repo.
 
-2) Follow the run instructions in the file's comments
+#### Install dependencies
 
-3) If you want to look at the Apache logs, check out ~/lib/apache2/log
+From within the cloned folder `fedapi-aaron` run:
 
-And that's all there is to it! Just have fun. Go ahead and edit the code, 
-or add new files. It's all up to you! 
+Node dependencies
 
-Happy coding!
-The Cloud9 IDE team
+```
+npm install
+```
 
+#### Configure application
 
-## Support & Documentation
+From within the cloned folder `fedapi-aaron`:
 
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+Change `.env.example` to `.env` and update accordingly.
+
+#### Testing
+
+From within the cloned folder `fedapi-aaron`:
+
+Run `npm test`
+
+#### Launching application
+
+From within the cloned folder `fedapi-aaron`:
+
+Run `npm start`
