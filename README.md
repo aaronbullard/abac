@@ -22,7 +22,7 @@ From within the cloned folder `abac`:
 
 Run `composer test`
 
-#### Using ABAC
+## Using ABAC
 
 This ABAC system is comprised of *Policies*, *Rules* and *Conditions*.
 
@@ -43,3 +43,8 @@ A Policy contains one or many Rules, and a Rule contains one or many Conditions.
   - Right side value
   - The operator to evaluate the two against
 - Left and right side values are persisted via string dot notation and gets resolved from the ABAC Request object.
+
+#### Example
+```
+
+```
