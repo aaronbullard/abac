@@ -71,7 +71,7 @@ $rules[] = new Rule('Election Day', "Only voting on election day", [
 ]);
 
 // Set policies to ABAC
-$abac = ABAC::create([new Policy('Voting', 'Policy to allow voting', $rules)]);
+$abac = ABAC::create([new Policy(Policy::ACCEPT, 'Voting', 'Policy to allow voting', $rules)]);
 
 // Set context
 $user = new User;
