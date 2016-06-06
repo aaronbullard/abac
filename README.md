@@ -46,5 +46,46 @@ A Policy contains one or many Rules, and a Rule contains one or many Conditions.
 
 #### Example
 ```
+<?php
+
+use ABAC\Services\ABACManager;
+use ABAC\Services\Request;
+use ABAC\Entities\Policy;
+use ABAC\Entities\Rule;
+use ABAC\Entities\Condition;
+use ABAC\Entities\User;
+use ABAC\Entities\Environment;
+use ABAC\Entities\Operators\Equals;
+use ABAC\Entities\Operators\GreaterThanInclusive;
+
+// Make rules
+$rules = [];
+
+$rules[] = new Rule('voter', "User is a US citizen of age", [
+  new Condition('$.user.age', new GreaterThanInclusive, 18),
+  new Condition('$.user.country', new Equals, 'USA')
+]);
+
+$rules[] = new Rule('Election Day', "Only voting on election day", [
+  new Condition('$.environment.day', new Equals, '2016-11-08')
+]);
+
+// Set policies to ABAC
+$abac = ABAC::create([new Policy('Voting', 'Policy to allow voting', $rules)]);
+
+// Set context
+$user = new User;
+$user->age = 25;
+$user->country = 'USA';
+
+$env = new Environment;
+$env->day = '2016-11-08';
+
+$request = new Request('POST', '/votes', $user, $env);
+
+// Resolve
+$allowed = $abac->validate( $request );
+
+// $this->assertTrue( $allowed );
 
 ```
