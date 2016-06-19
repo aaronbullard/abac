@@ -18,7 +18,7 @@ class ABACManager implements \ABAC\Contracts\Validatable {
             });
         });
         
-        $this->policies = collect($policies);
+        $this->policies = new Collection($policies);
         
         $this->policies->each(function($policy){
             if(! in_array($policy->getResponseType(), [Policy::ACCEPT, Policy::DENY])){

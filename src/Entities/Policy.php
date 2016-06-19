@@ -3,6 +3,7 @@
 namespace ABAC\Entities;
 
 use InvalidArgumentException;
+use Illuminate\Support\Collection;
 use ABAC\Services\Request;
 use ABAC\Traits\DescriptionTrait;
 
@@ -27,7 +28,7 @@ class Policy implements \ABAC\Contracts\Validatable {
         $this->responseType = $responseType;
         $this->name = $name;
         $this->description = $description;
-        $this->rules = collect($rules);
+        $this->rules = new Collection($rules);
     }
     
     
