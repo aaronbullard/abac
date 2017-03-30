@@ -21,10 +21,10 @@
             "ABAC\\": "src"
         },
         "classmap": [
-            "tests"    
+            "tests"
         ]
     },
     "scripts": {
-        "test": "vendor/bin/phpunit --colors=always --coverage-html=./coverage --coverage-text=tests/summary.txt"
+        "test": "./vendor/bin/phpunit --colors=always --coverage-html=./coverage --coverage-text=tests/summary.txt"
     }
 }
